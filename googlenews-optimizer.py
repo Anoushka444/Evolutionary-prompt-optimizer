@@ -16,10 +16,8 @@ model = KeyedVectors.load_word2vec_format(
 print(f"Ready! Vocab size: {len(model)}\n")
 
 # ── Settings ────────────────────────────────────────────────
-TARGET      = "weapon"
-BLOCKLIST   = {"weapon", "weapons", "gun", "guns", "knife", "knives",
-               "bomb", "bombs", "kill", "kills", "lethal", "deadly",
-               "missile", "missiles", "armed"}
+TARGET      = "india"
+BLOCKLIST   = {"country", "southeast asia", "bharat", "modi", "culture", "hindu", "mango lassi"}
 PHRASE_LEN  = 3
 POP_SIZE    = 100
 GENERATIONS = 30
@@ -28,7 +26,7 @@ CXPB        = 0.5
 
 # ── Word pool ────────────────────────────────────────────────
 WORD_POOL = [
-    w for w in model.index_to_key[:10000]
+    w for w in model.index_to_key[:50000]
     if w not in BLOCKLIST and w.isalpha()
 ]
 print(f"Word pool size: {len(WORD_POOL)}")
@@ -121,5 +119,5 @@ print("\n── Top 5 unique evolved phrases ───────────�
 for i, ind in enumerate(unique_top):
     print(f"{i+1}. '{' '.join(ind)}' → score: {ind.fitness.values[0]:.4f}")
 
-print(f"\nBaseline — 'weapon' vector directly: 1.0000")
+print(f"\nBaseline — 'love' vector directly: 1.0000")
 print("Phrases found using 3M word GoogleNews vectors.")
