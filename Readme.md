@@ -6,13 +6,10 @@ An NLP project that uses **genetic programming** (DEAP) and  **word embeddings**
 
 Safety filters often rely on keyword blocklists. This project demonstrates why that's insufficient: an evolutionary algorithm can automatically discover semantically equivalent phrases that bypass any blocklist you give it.
 
-Example — evolving phrases close to `"weapon"` with blocklist 
+Exampls evolving phrases close to `"weapon"` with a blocklist 
 `["weapon", "gun", "knife", "bomb", "kill", "lethal", "deadly"...]`:
 
 The algorithm found that `"components conspiracy rocket"` lives near `"weapon"` in semantic space without anyone feeding it that.
-
-## Why
-I wated to mirror real adversarial behavior against content moderation systems. Keyword filters fail because meaning is geometric, not literal. This is why modern safety systems use embedding-based semantic scorers instead of (or in addition to) keyword matching.
 
 ## How it works
 
@@ -37,7 +34,7 @@ First run downloads GloVe (~65MB, cached after that).
 
 ## Customize it
 
-In `optimizer.py`, change these settings at the top:
+In `optimizer.py`, change these settings at the top to use any word you want to use:
 
 ```python
 TARGET     = "weapon"      # choose your own
@@ -50,9 +47,3 @@ GENERATIONS = 30           # evolution rounds
 - [GloVe](https://nlp.stanford.edu/projects/glove/) via gensim
 - [DEAP](https://deap.readthedocs.io/) — evolutionary algorithms
 - NumPy
-
-## My learnings
-
-- Word embeddings encode meaning geometrically — similar contexts = similar vectors
-- Evolutionary algorithms can exploit semantic space without any linguistic rules
-- The algorithm independently discovered blocklist loopholes (e.g. using "weapons" when "weapon" was blocked), mirroring real adversarial behavior
